@@ -45,12 +45,11 @@
             for (let i = 0; i < 5; i++) {
                 const input = document.querySelector(`[data-index="${i}"]`);
                 const digit = input.value;
-                otpArray.push(digit); // Store the digit
-                //input.value = "*"; // Replace the entered digit with an asterisk
+                otpArray.push(digit); 
             }
 
             const otp = otpArray.join('');
-            otpResult.innerHTML = "Generated OTP: " + otp;
+            otpResult.innerHTML = "Generated OTP: " + otp; //Just for display, it's not really necessary
         }
     </script>
 </body>
