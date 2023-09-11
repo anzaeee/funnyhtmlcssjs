@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTP Generator</title>
+    <style>
+        .otp-input {
+            width: 2em;
+            text-align: center;
+            margin: 0 5px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>OTP Generator</h1>
+    <div id="otpContainer">
+        <input class="otp-input" type="text" maxlength="1" data-index="0" oninput="focusNext(this)" />
+        <input class="otp-input" type="text" maxlength="1" data-index="1" oninput="focusNext(this)" />
+        <input class="otp-input" type="text" maxlength="1" data-index="2" oninput="focusNext(this)" />
+        <input class="otp-input" type="text" maxlength="1" data-index="3" oninput="focusNext(this)" />
+        <input class="otp-input" type="text" maxlength="1" data-index="4" />
+    </div>
+    <button onclick="generateOTP()">Generate OTP</button>
+    <div id="otpResult"></div>
+
+    <script>
+        function focusNext(input) {
+            const maxLength = parseInt(input.getAttribute("maxlength"));
+            const index = parseInt(input.getAttribute("data-index"));
+
+            if (input.value.length >= maxLength) {
+                if (index < 4) {
+                    const nextInput = document.querySelector(`[data-index="${index + 1}"]`);
+                    if (nextInput) {
+                        nextInput.focus();
+                    }
+                }
+                input.style.visibility = "hidden";
+            }
+        }
+
+        function generateOTP() {
+            const otpArray = [];
+            for (let i = 0; i < 5; i++) {
+                const input = document.querySelector(`[data-index="${i}"]`);
+                const digit = input.value;
+                otpArray.push(digit);
+                input.value = ""; // Clear the input
+                input.style.visibility = "visible"; // Show the input
+            }
+
+            const otp = otpArray.join('');
+            document.getElementById("otpResult").innerHTML = "Generated OTP: " + otp;
+        }
+    </script>
+</body>
+</html>
